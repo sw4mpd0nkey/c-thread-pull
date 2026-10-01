@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#include <threadpool.h>
+#include "threadpool.h"
 
 #define THREADS 8
 #define QUEUE_SIZE 100
