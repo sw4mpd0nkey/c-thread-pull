@@ -1,9 +1,9 @@
-#include <pthread.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+#ifndef THREADPOOL_H
+#define THREADPOOL_H
 
-#define THREADS 8
+#include <pthread.h>
+
+#define THREADS 16
 #define QUEUE_SIZE 100
 
 // fn: A pointer to the function that will be executed.
@@ -34,16 +34,12 @@ typedef struct {
     int stop;
 } threadpool_t;
 
-void threadpool_init(threadpool_t* pool) {
-    pool->queued = 0;
-    pool->queued_front = 0;
-    pool->queued_back = 0;
-    pool->stop = 0;
 
-    pthread_mutex_init(&(pool->lock), NULL);
-    pthread_cond_init(&(pool->notify), NULL);
+// Function declarations
+void threadpool_init(threadpool_t* pool);
+void threadpool_destroy(threadpool_t* pool);
+void threadpool_add_task(threadpool_t* pool, void (*function)(void*), void* arg);
+void example_task(void* arg);
 
-    for (int i = 0; i < THREADS; i++) {
-       pthread_create(&(pool->threads[i]), NULL, thread_function, pool); 
-    }
-}
+
+#endif
