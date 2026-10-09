@@ -5,8 +5,9 @@
 
 #include "threadpool.h"
 
-#define THREADS 8
-#define QUEUE_SIZE 100
+void* thread_function(void* threadpool) {
+
+}
 
 void threadpool_init(threadpool_t* pool) {
     pool->queued = 0;
@@ -28,8 +29,8 @@ void threadpool_destroy(threadpool_t* pool) {
     pool->queued_back = 0;
     pool->stop = 0;
 
-    pthread_mutex_destroy(&(pool->lock), NULL);
-    pthread_cond_destroy(&(pool->notify), NULL);
+    pthread_mutex_destroy(&(pool->lock));
+    pthread_cond_destroy(&(pool->notify));
 }
 
 void threadpool_add_task(threadpool_t* pool, void (*function)(void*), void* arg) {

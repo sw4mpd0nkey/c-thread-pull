@@ -9,7 +9,7 @@
 // fn: A pointer to the function that will be executed.
 // arg: A pointer to the argument that will be passed to the function.
 typedef struct {
-    void (*fn)(void * arg)
+    void (*fn)(void * arg);
     void* arg;
 } task_t;
 
@@ -21,7 +21,7 @@ typedef struct {
     // A condition variable to notify threads when a new task is available
     pthread_cond_t notify;
     // An array of threads that make up the thread pool
-    pthreead_t threads[THREAD_POOL_SIZE];
+    pthread_t threads[THREADS];
     // An array representing the queue of tasks waiting to be executed.
     task_t task_queue[QUEUE_SIZE];
     // The maximum size of the task queue.
