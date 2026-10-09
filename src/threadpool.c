@@ -7,7 +7,7 @@
 
 void* thread_function(void* threadpool) {
 
-    threadpool_t* pool = (threadpool_t)threadpool;
+    threadpool_t* pool = (threadpool_t*)threadpool;
 
     while (1) {
         //lock the mutex on the pool itself
@@ -31,16 +31,16 @@ void* thread_function(void* threadpool) {
 
         pthread_mutex_unlock(&(pool->lock));
 
-        (*(task.function))(task.arg);
+        (*(task.fn))(task.arg);
     }
 
     return NULL;
 }
 
 void threadpool_init(threadpool_t* pool) {
-    pool->queued = 0;
-    pool->queued_front = 0;
-    pool->queued_back = 0;
+    pool->queue_size = QUEUE_SIZE;
+    pool->queue_front = 0;
+    pool->queue_back = 0;
     pool->stop = 0;
 
     pthread_mutex_init(&(pool->lock), NULL);
@@ -53,8 +53,8 @@ void threadpool_init(threadpool_t* pool) {
 
 void threadpool_destroy(threadpool_t* pool) {
     pool->queued = 0;
-    pool->queued_front = 0;
-    pool->queued_back = 0;
+    pool->queue_front = 0;
+    pool->queue_back = 0;
     pool->stop = 0;
 
     pthread_mutex_destroy(&(pool->lock));

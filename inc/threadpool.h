@@ -25,11 +25,13 @@ typedef struct {
     // An array representing the queue of tasks waiting to be executed.
     task_t task_queue[QUEUE_SIZE];
     // The maximum size of the task queue.
+    int queue_size;
+    // nunber of tasks queued up
     int queued;
     // The index of the front of the task queue.
-    int queued_front;
+    int queue_front;
     // The index of the rear of the task queue.
-    int queued_back;
+    int queue_back;
     // A flag to indicate when the thread pool should stop processing tasks and terminate.
     int stop;
 } threadpool_t;
