@@ -39,6 +39,7 @@ void* thread_function(void* threadpool) {
 
 void threadpool_init(threadpool_t* pool) {
     pool->queue_size = QUEUE_SIZE;
+    pool->queued = 0;
     pool->queue_front = 0;
     pool->queue_back = 0;
     pool->stop = 0;
