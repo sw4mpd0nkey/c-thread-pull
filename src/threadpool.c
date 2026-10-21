@@ -7,6 +7,8 @@
 
 void* thread_function(void* threadpool) {
 
+ /*   if (threadpool == NULL) return NULL;
+
     threadpool_t* pool = (threadpool_t*)threadpool;
 
     while (1) {
@@ -32,7 +34,7 @@ void* thread_function(void* threadpool) {
         pthread_mutex_unlock(&(pool->lock));
 
         (*(task.fn))(task.arg);
-    }
+    }*/
 
     return NULL;
 }
@@ -51,7 +53,7 @@ void threadpool_init(threadpool_t* pool) {
     pthread_cond_init(&(pool->notify), NULL);
 
     for (int i = 0; i < THREADS; i++) {
-       pthread_create(&(pool->threads[i]), NULL, thread_function, pool); 
+       pthread_create(&(pool->threads[i]), NULL, thread_function, &pool); 
     }
 }
 
