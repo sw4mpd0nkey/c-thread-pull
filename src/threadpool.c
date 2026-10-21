@@ -7,7 +7,7 @@
 
 void* thread_function(void* threadpool) {
 
- /*   if (threadpool == NULL) return NULL;
+    if (threadpool == NULL) return NULL;
 
     threadpool_t* pool = (threadpool_t*)threadpool;
 
@@ -34,7 +34,7 @@ void* thread_function(void* threadpool) {
         pthread_mutex_unlock(&(pool->lock));
 
         (*(task.fn))(task.arg);
-    }*/
+    }
 
     return NULL;
 }
