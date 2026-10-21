@@ -1,4 +1,4 @@
-TARGET = bin/threadpool
+TARGET = dist/threadpool
 
 SRC = $(wildcard src/*.c)
 OBJ = $(SRC:src/%.c=obj/%.o)
