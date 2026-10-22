@@ -16,24 +16,24 @@ void* thread_function(void* threadpool) {
         pthread_mutex_lock(&(pool->lock));
 
         // waits for pool to notify and then unlocks pool
-        while (pool->queue_size == 0 && !pool->stop) {
-            pthread_cond_wait(&(pool->notify), &(pool->lock));
-        }
+    //    while (pool->queued == 0 && !pool->stop) {
+    //        pthread_cond_wait(&(pool->notify), &(pool->lock));
+    //    }
 
         // make sure pool isnt stopped
-        if (pool->stop) {
-            pthread_mutex_unlock(&(pool->lock));
-            pthread_exit(NULL);
-        }
+//        if (pool->stop) {
+  //          pthread_mutex_unlock(&(pool->lock));
+    //        pthread_exit(NULL);
+      //  }
 
         // 
-        task_t task = pool->task_queue[pool->queue_front];
-        pool->queue_front = (pool->queue_front + 1) % QUEUE_SIZE;
-        pool->queued--;
+       // task_t task = pool->task_queue[pool->queue_front];
+       // pool->queue_front = (pool->queue_front + 1) % QUEUE_SIZE;
+       // pool->queued--;
 
         pthread_mutex_unlock(&(pool->lock));
 
-        (*(task.fn))(task.arg);
+       // (*(task.fn))(task.arg);
     }
 
     return NULL;
